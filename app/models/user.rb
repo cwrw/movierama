@@ -2,6 +2,7 @@ class User < BaseModel
   include Ohm::Timestamps
 
   attribute :name
+  attribute :email
 
   # Unique identifier for this user, in the form "{provider}|{provider-id}"
   attribute :uid
@@ -14,4 +15,9 @@ class User < BaseModel
 
   # Submitted movies
   collection :movies, :Movie
+
+  def validate
+    assert_present(:name)
+    assert_email(:email)
+  end
 end

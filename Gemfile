@@ -21,6 +21,7 @@ gem 'rack-ssl'
 # Use Redis as backing store
 gem 'ohm'
 gem 'ohm-contrib'
+gem 'ohm-validations'
 
 # ♥︎ thin models
 gem 'draper'

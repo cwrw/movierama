@@ -11,12 +11,12 @@ RSpec.describe 'email notifications', type: :feature do
     @alice = User.create(
       uid:  'null|12345',
       name: 'Alice',
-      email: "alice@gmail.com"
+      email: "alice@example.com"
     )
     @bob = User.create(
       uid:  'null|67890',
       name: 'Bob',
-      email: "bob@gmail.com"
+      email: "bob@example.com"
     )
     @m_empire = Movie.create(
       title:        'Empire strikes back',

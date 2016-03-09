@@ -10,7 +10,8 @@ RSpec.describe 'sort movie list', type: :feature do
   before do
     author = User.create(
       uid:  'null|12345',
-      name: 'Bob'
+      name: 'Bob',
+      email: 'bob@example.com'
     )
     @m_empire = Movie.create(
       title:        'Empire strikes back',

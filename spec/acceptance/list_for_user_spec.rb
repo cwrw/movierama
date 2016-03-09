@@ -9,11 +9,13 @@ RSpec.describe 'show a submitters movie list', type: :feature do
   before do
     @alice = User.create(
       uid:  'null|12345',
-      name: 'Alice'
+      name: 'Alice',
+      email: 'alice@example.com'
     )
     @bob = User.create(
       uid:  'null|67890',
-      name: 'Bob'
+      name: 'Bob',
+      email: 'bob@example.com'
     )
     @m_empire = Movie.create(
       title:        'Empire strikes back',
@@ -39,7 +41,7 @@ RSpec.describe 'show a submitters movie list', type: :feature do
     page.click_on 'Alice'
     expect(page.movie_titles).to include(@m_empire.title)
   end
-  
+
   it "hides others' movies" do
     page.click_on 'Bob'
     expect(page.movie_titles).not_to include(@m_empire.title)

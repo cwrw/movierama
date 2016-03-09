@@ -125,6 +125,9 @@ GEM
       redic
     ohm-contrib (2.0.0)
       ohm (~> 2.0.0)
+    ohm-validations (1.0.0)
+      ohm (~> 2.0)
+      scrivener (~> 1.0)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -226,6 +229,7 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    scrivener (1.0.0)
     slop (3.6.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -274,6 +278,7 @@ DEPENDENCIES
   newrelic_rpm
   ohm
   ohm-contrib
+  ohm-validations
   omniauth
   omniauth-github
   poltergeist
@@ -291,4 +296,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
