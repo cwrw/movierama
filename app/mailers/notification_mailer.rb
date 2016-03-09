@@ -1,7 +1,7 @@
 class NotificationMailer < ApplicationMailer
   default from: 'notifications@movierama.com'
 
-  def vote(author:, movie:, action:)
+  def vote_message(author:, movie:, action:)
     @author = author
     @movie  = movie
     @action = action

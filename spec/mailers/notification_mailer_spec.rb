@@ -21,7 +21,7 @@ RSpec.describe NotificationMailer do
 
     let(:action) { "like" }
     let(:mail) do
-      described_class.vote(
+      described_class.vote_message(
         author: author,
         movie: movie,
         action: action
