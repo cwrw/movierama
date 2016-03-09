@@ -40,35 +40,34 @@ RSpec.describe 'email notifications', type: :feature do
   before { page.open }
 
   it 'sends email on like' do
-    expect { page.like('Empire strikes back') }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+    Sidekiq::Testing.inline! do
+      expect { page.like('Empire strikes back') }
+        .to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
   end
 
   it 'sends email on hate' do
-    expect { page.like('Teenage mutant ninja turtles') }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+    Sidekiq::Testing.inline! do
+      expect { page.hate('Teenage mutant ninja turtles') }
+        .to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
   end
 
-  it "sends email on unlike" do
-    # TODO: not sure about this?
-    page.like('Teenage mutant ninja turtles')
-    expect { page.unlike('Teenage mutant ninja turtles') }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+  it "doesn't sends email on unlike" do
+    Sidekiq::Testing.inline! do
+      page.like('Teenage mutant ninja turtles')
+      expect { page.unlike('Teenage mutant ninja turtles') }
+        .to_not change { ActionMailer::Base.deliveries.count }
+    end
   end
 
-  it "sends email on unhate" do
-    # TODO: not sure about this?
-    page.hate('Empire strikes back')
-    expect { page.unhate('Empire strikes back') }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+  it "doesn't sends email on unhate" do
+    Sidekiq::Testing.inline! do
+      page.hate('Empire strikes back')
+      expect { page.unhate('Empire strikes back') }
+        .to_not change { ActionMailer::Base.deliveries.count }
+    end
   end
-
-  it "handles exceptions" do
-    # TODO: raise error, empty email?
-    expect(Rails.logger).to receive(:error).with("Boom!")
-  end
-
 end
-
 
 

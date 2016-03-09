@@ -22,8 +22,13 @@ RSpec.describe Notifier do
   subject { described_class.send_email( movie, action) }
 
   it "sends an email to author of movie about vote" do
-    expect { subject }
-      .to change { ActionMailer::Base.deliveries.count }.by(1)
+    expect(NotificationMailer)
+      .to receive(:vote_message).with(
+        author: author,
+        movie: movie,
+        action: action
+      )
+    subject
   end
 
   context "exceptions" do

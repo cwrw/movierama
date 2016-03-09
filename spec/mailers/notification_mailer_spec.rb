@@ -47,7 +47,5 @@ RSpec.describe NotificationMailer do
     it 'sets the correct body with movie and action' do
       expect(mail.body.encoded).to match("You have received a #{action} vote on your movie: #{movie.title}")
     end
-
-    it "exceptions"
   end
 end

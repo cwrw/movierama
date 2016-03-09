@@ -60,5 +60,15 @@ RSpec.describe VotingBooth do
       subject.vote(:hate)
       expect{ subject.unvote }.to change { m_empire.hater_count }.from(1).to(0)
     end
+
+    it "doesn't notify observer of like action" do
+      expect(Notifier).to_not receive(:send_email)
+      subject.unvote
+    end
+
+    it "doesn't notify observer of hate action" do
+      expect(Notifier).to_not receive(:send_email)
+      subject.unvote
+    end
   end
 end
