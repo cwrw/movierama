@@ -10,7 +10,6 @@ RSpec.describe VotingBooth do
   end
 
   let(:author) do
-
     User.create(
       uid:  'null|67890',
       name: 'Bob',
@@ -39,25 +38,26 @@ RSpec.describe VotingBooth do
     it "increment movie hater_count if vote is a hate" do
       expect{ subject.vote(:hate) }.to change { m_empire.hater_count }.from(0).to(1)
     end
+
+    it "notifies observer of like action" do
+      expect(Notifier).to receive(:send_email)
+      subject.vote(:like)
+    end
+
+    it "notifies observer of hate action" do
+      expect(Notifier).to receive(:send_email)
+      subject.vote(:hate)
+    end
   end
 
   describe "unvote" do
-    let(:m_empire) do
-      Movie.create(
-        title:        'Empire strikes back',
-        description:  'Who\'s scruffy-looking?',
-        date:         '1980-05-21',
-        user:         author,
-        liker_count:  1,
-        hater_count:  1
-      )
-    end
-
     it "dencrement movie liker_count if vote is a like" do
+      subject.vote(:like)
       expect{ subject.unvote }.to change { m_empire.liker_count }.from(1).to(0)
     end
 
     it "decrement movie hater_count if vote is a hate" do
+      subject.vote(:hate)
       expect{ subject.unvote }.to change { m_empire.hater_count }.from(1).to(0)
     end
   end
