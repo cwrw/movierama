@@ -1,4 +1,5 @@
 class User < BaseModel
+  include GlobalID::Identification
   include Ohm::Timestamps
 
   attribute :name

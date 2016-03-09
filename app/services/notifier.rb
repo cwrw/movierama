@@ -4,7 +4,7 @@ class Notifier
   def self.send_email(movie, action)
     new(movie, action).mailer
   rescue => e
-    Rails.logger.error e.message
+    Rails.logger.error "#{e.message}: #{e.backtrace}"
   end
 
 

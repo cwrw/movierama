@@ -37,7 +37,7 @@ RSpec.describe Notifier do
     end
 
     it "writes to error log" do
-      expect(Rails.logger).to receive(:error).with("Boom!")
+      expect(Rails.logger).to receive(:error).with(/Boom!/)
       subject
     end
   end
